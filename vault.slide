@@ -1,0 +1,133 @@
+Vault Slides
+"A super quick overview of why you should use vault"
+22 Aug 2018
+Tags: vault, hashicorp
+
+Thomas Gray
+thomas.gray@infinityworks.com
+@iamtgray
+
+View this presentation at github.com/iamtgray/vault-presentation
+
+
+* Vault
+
+.image img/vault.svg
+
+.caption _Vault_ by [[https://vaultproject.io/][Hashicorp]]
+
+* Topics
+
+- What can you use Vault for?
+- How to can you get your stuff out of Vault?
+- InfinityWorks Vault
+- Considerations before implementing Vault
+
+* What can you use Vault for?
+
+* Storing secrets
+
+
+
+- A secret is anything that you want to tightly control access to, such as API keys, passwords, or certificates
+
+* Generating certificates with the Vault PKI
+
+
+
+- Vault has the ability to generate or import a root/intermediate certificate, and generate client certificates for your services
+- This is awesome for having TLS over the wire for all of your internal services
+- You can generate these short-lived certificates on service startup
+- You don't need to create CSR's, Vault can do all that for you
+
+* Encryption
+
+- Vault supports stream encryption, so you can use your vault to securely store your information (great for PCI envs) 
+
+* Dynamic secrets
+
+- Vault can generate things like MySQL usernames/passwords for you, with the privilges you specify
+
+* Topics
+
+- -What can you use Vault for?- Done
+- How to can you get your stuff out of Vault?
+- InfinityWorks Vault
+- Considerations before implementing Vault
+
+* How to can you get your stuff out of Vault?
+
+*  How to can you get your stuff out of Vault?
+
+To get stuff out of your vault, you have to authenticate to it, so it knows who you are, and what stuff you should have access to.
+
+* For users
+
+- Github auth
+- Username/password auth 
+- LDAP
+- Okta
+- RADIUS
+- TLS Certificates
+- Tokens
+
+* For software
+
+- Approle - Pre shared keys used to generate tokens
+- AWS Auth - Either EC2 or IAM 
+- Azure/Google Cloud
+- Kubernetes - In-built auth for kube containers
+- TLS Certificates - Pre shared certs 
+- Tokens - Pre shared tokens
+
+
+* Topics
+
+- -What can you use Vault for?- Done
+- -How to can you get your stuff out of Vault?- Done
+- InfinityWorks Vault
+- Considerations before implementing Vault
+
+* InfinityWorks Vault
+
+* InfinityWorks Vault
+
+Infinityworks have a vault!
+
+You can use github authentication to access it, just generate a github token and 
+vault login -method github
+
+The vault address is: https://vault.infinityworks.com:8200
+
+Paste in your token!
+
+* Topics
+
+- -What can you use Vault for?- Done
+- -How to can you get your stuff out of Vault?- Done
+- -InfinityWorks Vault- Done
+- Considerations before implementing Vault
+
+* Considerations before implementing Vault
+
+* How will you un-seal your vault?
+
+Vault instances have to be unsealed, this is done via "secrets", these secrets combined form a decrytion key, that can be used to 
+allow for the decryption of data.
+
+This is called Shamir's Secret Sharing, there is a [[https://jameshall.blog/2017/03/25/generating-new-master-key-shares-in-vault/][really good white paper]] written by the ex-infinity worker James Hall about it.
+
+* EC2 auth is crap for modern deployments?
+
+Use more than one container/application per EC2? Don't use EC2 auth..
+
+However, you can use IAM auth, but it's a little bit less secure
+
+* Topics 
+
+- -What can you use Vault for?- Done
+- -How to can you get your stuff out of Vault?- Done
+- -InfinityWorks Vault- Done
+- -Considerations before implementing Vault- Done
+
+* Questions?
